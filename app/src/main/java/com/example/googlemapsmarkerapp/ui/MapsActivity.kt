@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
@@ -214,9 +215,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
                     relation.isEnabled = false
                     address.isEnabled = false
                     btnSave.setOnClickListener {
-                        mViewModel.deleteLocation(item.locationData)
-                        Toast.makeText(this, "Deleted.", Toast.LENGTH_SHORT).show()
-                        dialog.dismiss()
+                        val builder = AlertDialog.Builder(this)
+                        builder.setTitle("Deleting Marker")
+                        //set message for alert dialog
+                        builder.setMessage("are you sure?")
+                        builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+                        //performing positive action
+                        builder.setPositiveButton("Yes") { dialogInterface, which ->
+                            mViewModel.deleteLocation(item.locationData)
+                            Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show()
+                            dialog.dismiss()
+                        }
+                        //performing cancel action
+                        builder.setNeutralButton("No") { dialogInterface, which ->
+                        }
+                        // Create the AlertDialog
+                        val alertDialog: AlertDialog = builder.create()
+                        // Set other dialog properties
+                        alertDialog.setCancelable(false)
+                        alertDialog.show()
                     }
                 }
                 else -> {

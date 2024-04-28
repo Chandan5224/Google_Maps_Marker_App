@@ -24,6 +24,7 @@ class CustomInfoWindowAdapter(private val context: Context) : GoogleMap.InfoWind
         currentItem?.locationData?.let {
             lat.visibility = View.GONE
             lng.visibility = View.GONE
+            address.visibility = View.VISIBLE
             title.visibility = View.VISIBLE
             title.text = "Name : ${it.name}"
             address.text = "Address : ${it.address}"
