@@ -3,11 +3,14 @@ package com.example.googlemapsmarkerapp.ui
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.googlemapsmarkerapp.db.LocationData
+import com.example.googlemapsmarkerapp.model.LocationData
 import com.example.googlemapsmarkerapp.utils.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(private val repository: MainRepository) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
 
     var locations: MutableLiveData<Resource<List<LocationData>>> = MutableLiveData()
 

@@ -1,16 +1,17 @@
 package com.example.googlemapsmarkerapp.ui
 
-import com.example.googlemapsmarkerapp.db.AppDatabase
-import com.example.googlemapsmarkerapp.db.LocationData
+import com.example.googlemapsmarkerapp.model.LocationData
+import com.example.googlemapsmarkerapp.db.LocationDataDao
+import javax.inject.Inject
 
-class MainRepository(private val appDatabase: AppDatabase) {
+class MainRepository @Inject constructor(private val locationDataDao: LocationDataDao) {
 
     suspend fun insertLocation(locationData: LocationData) =
-        appDatabase.locationDataDao().insert(locationData)
+        locationDataDao.insert(locationData)
 
     suspend fun deleteLocation(locationData: LocationData) =
-        appDatabase.locationDataDao().delete(locationData)
+        locationDataDao.delete(locationData)
 
     suspend fun getAllSavedLocation() =
-        appDatabase.locationDataDao().getAllSavedLocation()
+        locationDataDao.getAllSavedLocation()
 }
